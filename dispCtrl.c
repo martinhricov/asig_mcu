@@ -35,7 +35,7 @@ void dispCtrl_sendChar(char cZnak){
 
 void dispCtrl_sendString(char *pcText){
     int i = 0;
-    for(int = 0l (pcText[i] != '\0') || (i<16); i++){
+    for(i = 0; (pcText[i] != '\0') || (i<16); i++){
         dispCtrl_sendChar(pcText[i]);
     }
 }
@@ -43,7 +43,6 @@ void dispCtrl_sendString(char *pcText){
 unsigned dispCtrl_setCursor(unsigned int u16row, unsigned int u16column){
     unsigned int adress;
 
-    //
     if((u16row>4) || (u16row==0))
         return 0;
 
@@ -53,23 +52,22 @@ unsigned dispCtrl_setCursor(unsigned int u16row, unsigned int u16column){
 
 
     if(u16row==1){
-        adress = 0x00+(u16colum-1);
+        adress = 0x00+(u16column-1);
 
     }
 
     if(u16row==2){
-        adress=0x20+(u16colum-1);
+        adress=0x20+(u16column-1);
     }
 
     if(u16row==3){
-        adress = 0x40+(u16colum-1);
+        adress = 0x40+(u16column-1);
     }
 
     if(u16row==4){
-        adress = 0x60+(u16colum-1);
+        adress = 0x60+(u16column-1);
     }
 
-
-    dispCtrl_sendData(0,0, (0x80 | adresa)); // 8x80 kvoli 1 na 7 bite.
+    dispCtrl_SendData(0,0, (0x80 | adress)); // 8x80 kvoli 1 na 7 bite.
     return 1;
 }
